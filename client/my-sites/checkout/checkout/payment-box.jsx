@@ -50,17 +50,31 @@ class PaymentBox extends PureComponent {
 		switch ( method ) {
 			case 'paypal':
 				return (
-					<img
-						src="/calypso/images/upgrades/paypal.svg"
-						alt="PayPal"
-						className="checkout__paypal"
-					/>
+					<div>
+						<img
+							src="/calypso/images/upgrades/paypal.svg"
+							alt="PayPal"
+							className="checkout__paypal"
+						/>
+					</div>
 				);
 			case 'credit-card':
-				return 'Credit Card';
+				return (
+					<div>
+						<img
+							src="/calypso/images/upgrades/credit-card.svg"
+							alt="PayPal"
+							className="checkout__credit-card"
+						/>
+						<span>Credit/Debit Card</span>
+					</div>
+				);
 			case 'ideal':
 				return (
-					<img src="/calypso/images/upgrades/ideal.svg" alt="iDEAL" className="checkout__ideal" />
+					<div>
+						<img src="/calypso/images/upgrades/ideal.svg" alt="iDEAL" className="checkout__ideal" />
+						<span>iDEAL</span>
+					</div>
 				);
 		}
 
@@ -99,11 +113,11 @@ class PaymentBox extends PureComponent {
 			contentClass = classNames( 'payment-box__content', this.props.contentClassSet );
 		return (
 			<div className="checkout__payment-box-container" key={ this.props.currentPage }>
-				<SectionNav>
+				<SectionNav selectedText={ translate( 'Select Payment Method:' ) }>
 					<NavTabs>
-						<span className="checkout__payment-box-title">
+						<li className="checkout__payment-box-title">
 							{ this.props.paymentMethods ? translate( 'Secure Payment with' ) : this.props.title }
-						</span>
+						</li>
 						{ this.getPaymentMethods() }
 					</NavTabs>
 				</SectionNav>
