@@ -101,7 +101,9 @@ class PaymentBox extends PureComponent {
 			<div className="checkout__payment-box-container" key={ this.props.currentPage }>
 				<SectionNav>
 					<NavTabs>
-						<span>{ translate( 'Secure Payment with' ) }</span>
+						<span>
+							{ this.props.paymentMethods ? translate( 'Secure Payment with' ) : this.props.title }
+						</span>
 						{ this.getPaymentMethods() }
 					</NavTabs>
 				</SectionNav>

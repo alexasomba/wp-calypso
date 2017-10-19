@@ -11,6 +11,7 @@ import React from 'react';
 /**
  * Internal dependencies
  */
+import classnames from 'classnames';
 import analytics from 'lib/analytics';
 import cartValues from 'lib/cart-values';
 import CountrySelect from 'my-sites/domains/components/form/country-select';
@@ -154,6 +155,9 @@ export default localize(
 				config.isEnabled( 'upgrades/presale-chat' ) &&
 				abtest( 'presaleChatButton' ) === 'showChatButton' &&
 				hasBusinessPlanInCart;
+			const creditCardButtonClasses = classnames( 'credit-card-payment-box__switch-link', {
+				'credit-card-payment-box__switch-link-left': showPaymentChatButton,
+			} );
 
 			return (
 				<form onSubmit={ this.redirectToPayPal }>
@@ -196,6 +200,16 @@ export default localize(
 
 							<SubscriptionText cart={ this.props.cart } />
 						</div>
+
+						{ this.props.onToggle &&
+						cartValues.isCreditCardPaymentsEnabled( this.props.cart ) && (
+							<a href="" className={ creditCardButtonClasses } onClick={ this.handleToggle }>
+								{ this.props.translate( 'or use a credit card', {
+									context: 'Upgrades: PayPal checkout screen',
+									comment: 'Checkout with PayPal -- or use a credit card',
+								} ) }
+							</a>
+						) }
 
 						{ showPaymentChatButton && (
 							<PaymentChatButton paymentType="paypal" cart={ this.props.cart } />
